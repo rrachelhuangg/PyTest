@@ -10,3 +10,6 @@ for a in client.list_aggs(ticker=ticker, multiplier=1, timespan="minute", from_=
     aggs.append(a)
 
 print(aggs)
+
+quote = client.get_last_quote(ticker=ticker)
+print(quote)
