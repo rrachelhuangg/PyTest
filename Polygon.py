@@ -12,6 +12,7 @@ for a in client.list_aggs(ticker=ticker, multiplier=1, timespan="hour", from_="2
 print(aggs)
 print(len(aggs))
 
+#need premium access to Polygon for these calls
 # Get Last Trade
 #trade = client.get_last_trade(ticker=ticker)
 #print(trade)
