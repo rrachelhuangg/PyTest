@@ -4,10 +4,6 @@
 - Polygon.io (stock market data)
 - create data visualizations for the stock data
 
-- 3/5: created git repo and pulled data from Polygon
-- 3/7: created candlestick chart visualization for Apple stock data
-![AppleVisualization1](https://github.com/rrachelhuangg/PyTest/assets/148505431/4a3801e2-63e6-4632-a1aa-9465d3face97)
-
 - ml stock algorithms to look at:
   - https://medium.com/analytics-vidhya/how-im-using-machine-learning-to-trade-in-the-stock-market-3ba981a2ffc2 + https://github.com/kaneelgit/ML-DL-Algorithms/blob/main/Logistic%20Regression%20from%20Scratch.ipynb
   - https://www.investopedia.com/articles/active-trading/081315/how-code-your-own-algo-trading-robot.asp
