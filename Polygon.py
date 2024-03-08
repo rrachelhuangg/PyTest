@@ -41,3 +41,4 @@ plt.xlabel("Number of Hours Into the Two Day Time Span")
 plt.ylabel("Stock Value in USD")
 plt.ylim(min(lows)-0.01*min(lows), max(highs) + 0.01*max(highs)) #setting the bounds for the y-axis
 plt.show()
+
