@@ -2,6 +2,8 @@ from polygon import RESTClient
 import matplotlib.pyplot as plt
 import pandas as pd
 import math
+from datetime import datetime
+from datetime import timedelta
 
 client = RESTClient(api_key="h8IoGYiQLCNjfJfU7je02JpmLrk4SJF9")
 
@@ -14,7 +16,9 @@ highs = [] #high values for each hour mark
 lows = [] #low values for each hour mark
 hourMarks = [] #x values for visualization
 #only free Polygon data call lmao
-for a in client.list_aggs(ticker=ticker, multiplier=40, timespan="minute", from_="2024-03-04", to="2024-03-05", limit=50000):
+today = datetime.now().strftime('%Y-%m-%d') #makes string of today
+yesterday = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d') #makes string of yesterday
+for a in client.list_aggs(ticker=ticker, multiplier=40, timespan="minute", from_=yesterday, to=today, limit=50000):
     aggs.append(a)
 for i, a in enumerate(aggs):
     highs += [a.high]
@@ -36,7 +40,12 @@ plt.bar(up.index, up.low-up.open, width2, bottom=up.open, color=col2) # bot thin
 plt.bar(down.index, down.close-down.open, width, bottom=down.open, color=col1) # thick bar (open-close)
 plt.bar(down.index, down.high-down.open, width2, bottom=down.open, color=col1) # top thin bar (high)
 plt.bar(down.index, down.low-down.close, width2, bottom=down.close, color=col1) # bot thin bar (low)
-plt.title("Apple Stock From 3/4/24 - 3/5/24")
+
+first = stock_prices[1:]
+last = stock_prices[:-1]
+plt.plot(first.index, first.close, last.index, last.close, color="black")
+
+plt.title("Apple Stock From %s - %s" % (yesterday, today))
 plt.xlabel("Number of Hours Into the Two Day Time Span")
 plt.ylabel("Stock Value in USD")
 plt.ylim(min(lows)-0.01*min(lows), max(highs) + 0.01*max(highs)) #setting the bounds for the y-axis
