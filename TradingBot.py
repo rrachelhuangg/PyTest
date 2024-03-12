@@ -1,10 +1,12 @@
+#generates market signals for past EURUSD data, trading actions represented by print statements
 import yfinance as yf #Python library that allows us to download financial data from Yahoo Finance
-import pandas as pd
+import pandas as pd #pip install as necessary
 
 #dataF is a pandas DataFrame (basically a table of data)
 #keys in dataF = column names of the DataFrame
 #row names are date and time info
 dataF = yf.download("EURUSD=X", start="2024-2-1", end="2024-3-1", interval='60m') #EUR => USD conversion data
+dates = dataF.index #index = the DataFrame's row labels
 
 def signal_generator(df): #generates signal for every two rows ( two sequential hours) of data in dataF
     open = df.Open.iloc[-1] #.Open gives the returns data info and open value; slicing [-1] just gives open value for second hour in df
@@ -28,7 +30,12 @@ for i in range(1,len(dataF)): #going through the hour data
     #print(df.Open) #prints both open values contained in df
     signals.append(signal_generator(df)) #collecting signal values for each two hour set of dataF
 dataF["signal"] = signals
-print(dataF.signal.value_counts()) #returns a pandas Series object containing counts of unique values in descending order for key signal
+#print(dataF.signal.value_counts()) #returns a pandas Series object containing counts of unique values in descending order for key signal
 #a pandas Series object is like a column in a table: it is a 1D array that can hold data of any type
 
+# very basic logic just to test functionality: if bearish, sell, if bullish, buy
+for i in range(1, len(dataF)):
+    df = dataF[i-1:i+1] 
+    if dataF["signal"].iloc[i] == 1:print(dates[i], "selling")
+    elif dataF["signal"].iloc[i] == 2: print(dates[i], "buying")
 
