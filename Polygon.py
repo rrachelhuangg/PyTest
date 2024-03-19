@@ -51,5 +51,6 @@ plt.xlim(0, len(stock_prices))
 plt.ylabel("Stock Value in USD")
 plt.ylim(min(lows)-0.01*min(lows), max(highs) + 0.01*max(highs)) #setting the bounds for the y-axis
 # plt.autofocus()
+#displays in JS
 mpld3.show()
 
