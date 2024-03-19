@@ -45,8 +45,6 @@ first = stock_prices[:-1]
 last = stock_prices[1:]
 plt.plot(first.index, first.close, last.index, last.close, color="black")
 
-plt.
-
 plt.title("Apple Stock From %s - %s" % (prior, today))
 plt.xlabel("Number of Hours Into the Week Time Span")
 plt.xlim(0, len(stock_prices))
