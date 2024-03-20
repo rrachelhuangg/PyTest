@@ -7,18 +7,17 @@ from datetime import datetime
 from datetime import timedelta
 
 
-def get_data(timespan):
+def get_data(timeSpanName, timeValue, timeMulti, ticker):
     client = RESTClient(api_key="h8IoGYiQLCNjfJfU7je02JpmLrk4SJF9")
 
-    ticker = "GOOGL"
 
     aggs = []
     closeVals = [] #close values for each hour mark, top value of each hour bar
     hourMarks = [] #x values for visualization
     #only free Polygon data call lmao
     today = datetime.now().strftime('%Y-%m-%d') #makes string of today
-    prior = (datetime.now() - timedelta(timespan)).strftime('%Y-%m-%d') #makes string of starting day
-    for a in client.list_aggs(ticker=ticker, multiplier=1, timespan="hour", from_=prior, to=today, limit=50000):
+    prior = (datetime.now() - timedelta(timeValue)).strftime('%Y-%m-%d') #makes string of starting day
+    for a in client.list_aggs(ticker=ticker, multiplier=timeMulti, timespan=timeSpanName, from_=prior, to=today, limit=50000):
        aggs.append(a)
     for i, a in enumerate(aggs):
         closeVals += [a.close]
@@ -60,13 +59,16 @@ def gradient_descent_runner(points, starting_b, starting_m, learningrate, numite
     return [m,b]
 
 def run():
-    timespan = 7
-    points = get_data(timespan)
+    timeValue = 30
+    timeSpanName = "hour"
+    timeMulti = 12
+    ticker = "AAPL"
+    points = get_data(timeSpanName, timeValue, timeMulti, ticker)
     b = points[0][0]
     m = 0
     
-    learningrate = 0.006/(timespan**2)
-    iterations = int(5000*np.sqrt(timespan))
+    learningrate = 0.006/(timeValue**2)
+    iterations = int(5000*np.sqrt(timeValue))
     
 
     m,b = gradient_descent_runner(points, b, m, learningrate, iterations)
