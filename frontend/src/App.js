@@ -20,7 +20,7 @@ function App() {
     fetch( './constituents.csv' )
         .then( response => response.text() )
         .then( responseText => {
-            setText( responseText);
+            setText(responseText.slice(0, 100));
         })
 
   return (
@@ -40,7 +40,6 @@ function App() {
   <div class="column">
     <h2> other info </h2>
     <pre>{ text }</pre>
-  <p> ---</p>
   </div>
 </div>
   </>
