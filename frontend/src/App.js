@@ -1,24 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
 
+function NavBar(){
+  return(<>
+  <ul>
+  <li><a href="default.asp">Home</a></li>
+  <li><a href="news.asp">News</a></li>
+  <li><a href="contact.asp">Contact</a></li>
+  <li><a href="about.asp">About</a></li>
+</ul></>);
+}
+
+function Content(){
+  return (<><div class="container">
+  <div class="column">
+    <h2> User's current stats </h2>
+  <p> money</p>
+  <p> stocks they hold</p>
+  </div>
+  <div class="column">
+    <h2> visualizations for stocks </h2>
+  <p>general stock info</p>
+  <p>info from our model</p>
+  </div>
+  <div class="column">
+    <h2> other info </h2>
+  <p> ---</p>
+  </div>
+</div></>);
+}
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <NavBar/>
+    <Content/>
+  </>
   );
 }
 
