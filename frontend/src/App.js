@@ -11,11 +11,9 @@ function NavBar(){
 </ul></>);
 }
 
-function App() {
-  return (
-    <>
-    <NavBar/>
-    <div class="container">
+function Content(){
+  return(<>
+  <div class="container">
 	   <div class="column">
 	     <h2> User's current stats </h2>
 		 <p> money</p>
@@ -30,7 +28,14 @@ function App() {
 	     <h2> other info </h2>
 		 <p> ---</p>
 	   </div>
-	</div>
+	</div></>);
+}
+
+function App() {
+  return (
+    <>
+    <NavBar/>
+    <Content/>
   </>
   );
 }
