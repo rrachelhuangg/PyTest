@@ -8,14 +8,38 @@ from datetime import timedelta
 from LinearRegTest import * 
 
 index_symbol = "SPY"
-index_slope = run(index_symbol, 30, "hour", 12)
+index_slope = run(index_symbol, 30, 7, "hour", 1)
 print(index_slope)
 tickers = pd.read_csv("constituents.csv")
-print(tickers.Symbol)
-test = pd.DataFrame({"index_slope": [20, 20, 20], "prev_slope": [-10, 5, -3], "mean_diff": [5, 6, 1], "finance":[1, 0, 1], "tech":[1, 0, 1], 
-                                                  "energy": [1, 0, 1], "industrials": [1, 0, 1], "healthcare": [1, 0, 1], "estate_materials": [1, 0, 1], "week_slope": [-1, 8, 3]})
+symbols = tickers.Symbol
+compl_symbols, symbol_slopes, variance, week_slopes, index_slopes = ([] for i in range(5))
+#finance = []
+#communication = []
+#health_care = []
+#info_tech = []
+#energy = []
+#industrials = []
+start_time = datetime.now()
+for symbol in symbols:
+    try:
+        m, mean_diff = run(symbol, 30, 7, "day", 1)
+        compl_symbols = [symbol]
+        symbol_slopes += [m]
+        variance += [mean_diff]
+        week_slopes = run(symbol, 7, 0, "hour", 6)
+        index_slopes += [index_slope]
+        print(symbol)
+    except:
+        print("Error on {}: {}".format(symbol, OSError))
+print((start_time - datetime.now()).strftime("%H:%M:%S"))
 
 
+test = pd.DataFrame({'symbol': compl_symbols, 'index_slope': index_slopes, 'prev_slope': symbol_slopes, 'mean_diff': variance, 'week_slope': week_slopes})
+#test = pd.DataFrame({"symbol": symbols "index_slope": index_slope, "prev_slope": [-10, 5, -3], "mean_diff": [5, 6, 1], "finance":[1, 0, 1], "communication":[1, 0, 1], "health_care": [1, 0, 1], "information_tech": [1, 0, 1],
+#                                                  "energy": [1, 0, 1], "industrials": [1, 0, 1], "healthcare": [1, 0, 1], "real_estate": [1, 0, 1], 
+#                                                  "utilities":[1, 0, 1],"materials":[1, 0, 1],"consumer_disc":[1, 0, 1],"consumer_staples":[1, 0, 1],"week_slope": [-1, 8, 3]})
+
+print(test)
 
 
 # stock array = slope of index fund for past month,  slope of past month, avgdiff between high and low vals, array(company types (true or false)), next week slope
