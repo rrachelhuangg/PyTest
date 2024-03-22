@@ -22,7 +22,7 @@ def get_data(timeSpanName, timeValue, timeMulti, ticker):
     for i, a in enumerate(aggs):
         closeVals += [a.close]
         hourMarks += [i]
-    print(len(closeVals))
+    #print(len(closeVals))
     return [closeVals, hourMarks]
 
 
@@ -58,7 +58,7 @@ def gradient_descent_runner(points, starting_b, starting_m, learningrate, numite
         #print(calc_error(m, b, points))
     return [m,b]
 
-def run():
+def run(ticker, time, timespan, timeMulti):
     timeValue = 30
     timeSpanName = "hour"
     timeMulti = 12
@@ -69,16 +69,13 @@ def run():
     
     learningrate = 0.006/(timeValue**2)
     iterations = int(5000*np.sqrt(timeValue))
-    
 
     m,b = gradient_descent_runner(points, b, m, learningrate, iterations)
-    print(calc_error(m, b, points))
+    #print(calc_error(m, b, points))
     x = np.array(points[1])
     y = m * x + b
 
-    plt.plot(x, y)
-    plt.scatter(points[1], points[0], 1)
-    plt.show()
+    return m
 
 if __name__ == '__main__':
     run()
