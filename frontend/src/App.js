@@ -1,8 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 //can read .csv file data and display it on the page: if we write data that we collect from the api to a csv
 //file, we will be able to use it in react 
+
+function TickerDisplay(){
+  return(<>
+  <div className = "tickerContainer">
+  <img src = "./testgraph.png" className = "images"/>
+    <button>Buy</button>
+    <button>Sell</button></div></>
+    );
+}
 
 function NavBar(){
   return(<>
@@ -32,10 +44,12 @@ function App() {
   <p> money</p>
   <p> stocks they hold</p>
   </div>
-  <div class="column">
+  <div class="column" style={{ height: '100vh', overflow: 'scroll' }}>
     <h2> visualizations for stocks </h2>
-  <p>general stock info</p>
-  <p>info from our model</p>
+    <TickerDisplay/>
+    <TickerDisplay/>
+    <TickerDisplay/>
+
   </div>
   <div class="column">
     <h2> other info </h2>

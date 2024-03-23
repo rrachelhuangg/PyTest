@@ -75,3 +75,8 @@ li a {
 li a:hover {
   background-color: #111;
 }
+
+.tickerContainer img{
+  /* height:100%; */
+  width:90%;
+}
